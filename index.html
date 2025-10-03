@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chip Clicker</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #fff8dc;
+    }
+    #chip {
+      width: 200px;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    #chip:active {
+      transform: scale(0.95);
+    }
+    #score {
+      font-size: 24px;
+      margin: 20px;
+      color: #d2691e;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #f4a460;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Chip Clicker</h1>
+  <div id="score">Chips: 0</div>
+  <img id="chip" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Potato_chip.jpg/320px-Potato_chip.jpg" alt="Potato Chip">
+  <br><br>
+  <button id="upgrade">Buy Fryer (Cost: 50)</button>
+
+  <script>
+    let chips = 0;
+    let
