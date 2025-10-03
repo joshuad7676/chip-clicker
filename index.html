@@ -8,6 +8,8 @@
       text-align: center;
       font-family: 'Comic Sans MS', cursive, sans-serif;
       background-color: #fff8dc;
+      margin: 0;
+      padding: 0;
     }
     #chip {
       width: 200px;
@@ -29,6 +31,22 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      margin: 10px;
+    }
+    .floating {
+      position: absolute;
+      animation: floatUp 1s ease-out forwards;
+      font-size: 20px;
+      color: #d2691e;
+    }
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-50px); }
+    }
+    #achievements {
+      margin-top: 20px;
+      font-size: 18px;
+      color: green;
     }
   </style>
 </head>
@@ -36,9 +54,39 @@
   <h1>Chip Clicker</h1>
   <div id="score">Chips: 0</div>
   <img id="chip" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Potato_chip.jpg/320px-Potato_chip.jpg" alt="Potato Chip">
-  <br><br>
-  <button id="upgrade">Buy Fryer (Cost: 50)</button>
+  <br>
+  <button id="fryerBtn">Buy Fryer (Cost: 50)</button>
+  <button id="saltBtn">Buy Salt Shaker (Cost: 200)</button>
+  <div id="achievements"></div>
+  <audio id="crunch" src="https://www.soundjay.com/button/sounds/button-16.mp3"></audio>
 
   <script>
-    let chips = 0;
-    let
+    let chips = parseInt(localStorage.getItem('chips')) || 0;
+    let fryers = parseInt(localStorage.getItem('fryers')) || 0;
+    let saltShakers = parseInt(localStorage.getItem('saltShakers')) || 0;
+    let fryerCost = parseInt(localStorage.getItem('fryerCost')) || 50;
+    let saltShakerCost = parseInt(localStorage.getItem('saltShakerCost')) || 200;
+
+    const scoreDisplay = document.getElementById('score');
+    const chipImg = document.getElementById('chip');
+    const fryerBtn = document.getElementById('fryerBtn');
+    const saltBtn = document.getElementById('saltBtn');
+    const crunchSound = document.getElementById('crunch');
+    const achievementsDiv = document.getElementById('achievements');
+
+    function updateScore() {
+      scoreDisplay.textContent = `Chips: ${chips}`;
+      localStorage.setItem('chips', chips);
+      localStorage.setItem('fryers', fryers);
+      localStorage.setItem('saltShakers', saltShakers);
+      localStorage.setItem('fryerCost', fryerCost);
+      localStorage.setItem('saltShakerCost', saltShakerCost);
+    }
+
+    function showFloatingText(text) {
+      const float = document.createElement('div');
+      float.textContent = text;
+      float.className = 'floating';
+      float.style.left = `${Math.random() * window.innerWidth}px`;
+      float.style.top = `${chipImg.offsetTop}px`;
+      document
